@@ -57,7 +57,7 @@ const inquirer = require('inquirer');
     var currentDate = new Date().toDateString();
     var currentTime= new Date().toLocaleTimeString();
     console.log("The current time is " + currentTime);
-    console.log("The current date is: " + currentDate)
+    console.log("The current date is: " + currentDate);
     this.main();
    }
 
@@ -66,5 +66,10 @@ const inquirer = require('inquirer');
      process.exit();
    }
 
+   getContactCount(){
+
+     return this.contacts.length;
+
+   }
 
  }
