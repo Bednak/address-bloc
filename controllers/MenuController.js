@@ -1,16 +1,17 @@
 const inquirer = require('inquirer');
 
- module.exports = class MenuController {
-   constructor(){
+module.exports = class MenuController {
+  constructor(){
 
-     this.mainMenuQuestions = [
+    this.mainMenuQuestions = [
       {
-       type: "list",
+        type: "list",
         name: "mainMenuChoice",
         message: "Please choose from an option below: ",
         choices: [
           "Add new contact",
           "Get current time and date",
+          "Remind Me",
           "Exit"
         ]
       }
@@ -18,58 +19,66 @@ const inquirer = require('inquirer');
     this.contacts = [];
 
 
-   }
+  }
 
-   main(){
-     console.log(`Welcome to AddressBloc!`);
-     inquirer.prompt(this.mainMenuQuestions).then((response) => {
-       switch(response.mainMenuChoice){
-         case "Add new contact":
-           this.addContact();
-           break;
-         case "Get current time and date":
-           this.getDate();
-           break;
-         case "Exit":
-           this.exit();
-         default:
-           console.log("Invalid input");
-           this.main();
-       }
-     })
-     .catch((err) => {
-       console.log(err);
-     });
-   }
+  main(){
+    console.log(`Welcome to AddressBloc!`);
+    inquirer.prompt(this.mainMenuQuestions).then((response) => {
+      switch(response.mainMenuChoice){
+        case "Add new contact":
+        this.addContact();
+        break;
+        case "Get current time and date":
+        this.getDate();
+        break;
+        case "Remind Me":
+        this.remindMe()
+        break;
+        case "Exit":
+        this.exit();
+        default:
+        console.log("Invalid input");
+        this.main();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
-   clear(){
-     console.log("\x1Bc");
-   }
+  clear(){
+    console.log("\x1Bc");
+  }
 
-   addContact(){
+  addContact(){
     this.clear();
     console.log('addContact called');
     this.main();
-   }
+  }
 
-   getDate(){
+  getDate(){
     this.clear();
     var currentDate = new Date().toDateString();
     var currentTime= new Date().toLocaleTimeString();
     console.log("The current time is " + currentTime);
     console.log("The current date is: " + currentDate);
     this.main();
-   }
+  }
 
-   exit(){
-     console.log("Thanks for using AddressBloc!");
-     process.exit();
-   }
+  exit(){
+    console.log("Thanks for using AddressBloc!");
+    process.exit();
+  }
 
-   getContactCount(){
+  getContactCount(){
+    return this.contacts.length;
+  }
 
-     return this.contacts.length;
+  remindMe(){
+    this.clear();
+    console.log("Learning is a life-long pursuit");
+    return "Learning is a life-long pursuit";    
+    this.main();
+  }
 
-   }
-
- }
+}
